@@ -3,16 +3,23 @@
 This project has been initiated for family photo share. It aims to provide a single environnement for entire group (in my case, family).
 
 Front :
-Angular 6
-Sass
+- Angular 6
+- Sass
 
 Back : 
-Nodejs
-Mongodb
+- Nodejs
+- Mongodb
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+For Front End : 
+- npm install
+- ng serve
+
+For Back End : 
+- cd server
+- npm install
+- node (or nodemon) server.js
 
 ## Code scaffolding
 
