@@ -1,0 +1,16 @@
+<div class="nav">
+  <div class="user">
+      <h1>Salut {{ user }} !</h1>
+      <img [src]="photo" alt="user photo">
+  </div>
+
+  <a routerLink="/home/add" [class.hidden]="hideRoute">Ajouter un Album</a>
+  <a routerLink="/home/modify" [class.hidden]="hideRoute">Modifier un Album</a>
+  <a routerLink="/home/delete" [class.hidden]="hideRoute">Supprimer un Album</a>
+  <a routerLink="/home/list" [class.hidden]="!hideRoute">Retour</a>
+  <span class="logout">
+      <a routerLink="/login">Se déconnecter</a>
+  </span>
+  
+
+</div>
