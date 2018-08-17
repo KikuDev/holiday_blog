@@ -1,0 +1,86 @@
+h1 {
+	margin: 0;
+	text-align: center;
+    border-bottom: 1px solid #a5a5a5;
+    padding-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+    label {
+        left: 5px;
+        position: absolute;
+        top: 0;
+        transition: 250ms;
+        &.focus {
+            font-size: 12px;
+            top: -14px;
+        }
+    }
+    input {
+        background-color: #0000;
+        border: none;
+        box-shadow: none;
+        padding: 5px;
+        position: relative;
+        width: 100%;
+        box-sizing: border-box;
+        border-bottom: 1px solid #262626;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+p {
+	margin-bottom: 0;
+}
+
+.mat-form-field {
+	width: 100%;
+}
+
+.step-1 {
+	box-shadow: 0px 0px 10px -2px #000;
+	height: 526px;
+	overflow: hidden;
+	padding: 20px;
+	transition: 800ms ease-in-out;
+	&.validated {
+		animation: 500ms stepValidated 900ms forwards ease-out;
+		height: 37px;
+	}
+}
+
+@keyframes stepValidated {
+	100% {
+		transform: translate(-60%, -446%);
+	}
+}
+
+button {
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid #000;
+    box-shadow: none;
+    box-sizing: border-box;
+    margin-top: 35px;
+    height: 50px;
+    background-color: #262626;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 250ms;
+    &:hover {
+        background-color: #fff;
+        color: #262626;
+    }
+    &:focus {
+        outline: none;
+    }
+}

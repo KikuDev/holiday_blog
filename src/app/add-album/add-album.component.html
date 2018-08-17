@@ -1,16 +1,7 @@
 <div class="add" (click)="manageFocus($event)">
-  <div class="step-1">
-    <h1>Première Étape : les informations</h1>
-    <div class="form-group">
-      <label for="persons" [class.focus]="personsFocused || persons.length > 0">Qui ?</label>
-      <input type="text" class="form-control" id="persons" placeholder="" [(ngModel)]="persons">
-    </div>
 
-    <div class="form-group">
-      <label for="city" [class.focus]="cityFocused || city.length > 0">Où ?</label>
-      <input type="text" class="form-control" id="city" placeholder="" [(ngModel)]="city">
-    </div>
-  </div>
+  <app-step1 [personsFocused]="personsFocused" [cityFocused]="cityFocused"></app-step1>
+
 
 
     <!--

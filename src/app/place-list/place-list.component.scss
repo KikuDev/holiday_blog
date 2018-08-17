@@ -1,8 +1,11 @@
 .list {
+    background-color: #000;
 	display: flex;
 	position: absolute;
     top: 0%;
     left: 20%;
+    height: 100%;
     width: 80%;
     overflow: scroll;
+    align-items: center;
 }

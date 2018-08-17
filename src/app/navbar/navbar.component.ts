@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
   constructor(public router: Router) { }
 
   ngOnInit() {
+    this.router.url !== '/home/list' ?  this.hideRoute = true : this.hideRoute = false;
     this.router.events.subscribe( (event: Event) => {
       if (event instanceof NavigationStart) {
         event.url !== '/home/list' ?  this.hideRoute = true : this.hideRoute = false;

@@ -9,19 +9,15 @@ import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions }
 
 
 export class AddAlbumComponent {
-  // Albums types
-  persons: string = '';
-  city: string = '';
-  date: any;
-  personsFocused: boolean = false;
-  cityFocused: boolean = false;
-
   options: UploaderOptions;
   formData: FormData;
   files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
   dragOver: boolean;
+
+  personsFocused: boolean = false;
+  cityFocused: boolean = false;
 
   constructor() {
     this.options = { concurrency: 1, maxUploads: 3 };
