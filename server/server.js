@@ -2,92 +2,33 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
-
 const app = express();
 const http = require('http').Server(app);
 const port = process.env.PORT || 8081;
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken');
-var MongoClient = require('mongodb').MongoClient;
 
-
-app.use(cors());
-
+app.use(cors({origin: '*'}));
 app.use(morgan('combined'));
-app.use(bodyParser.json());
-var urlencodedParser = bodyParser.urlencoded({extended:false});
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true, parameterLimit: 100000}));
 
 
 // DATABASE
-const mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/familiz';
-mongoose.connect(mongoDB, {useNewUrlParser: true});
-mongoose.Promise = global.Promise;
-var db = mongoose.connection;
+require('./routes/login')(app);
+require('./routes/albums')(app);
 
-
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-
-var Schema = mongoose.Schema;
-
-var AlbumsSchema = new Schema({
-    id: Number,
+var MembersSchema = new mongoose.Schema({
 	name: String,
-	date: String,
-	couverture: String,
-	album: [String]
+	photo: String
 });
 
+var Members = mongoose.model('Members', MembersSchema );
 
-
-var Albums = mongoose.model('Albums', AlbumsSchema );
-
-app.get('/getAlbums', (req, res) => {
-	Albums.find({}, function (err, albums) {
+app.get('/getMembers', (req, res) => {
+	Members.find({}, function (err, members) {
 		if (err) return handleError(err);
-		res.status(200).send(albums);
+		res.status(200).send(members);
 	});
-});
-
-var UsersSchema = new Schema({
-	username: String,
-    password: String
-});
-
-var Users = mongoose.model('Users', UsersSchema );
-
-function getUsers(username, password) {
-	Users.find(function (err, user) {
-		console.log(user);
-	});
-}
-
-app.post('/login', urlencodedParser, (req, res) => {
-	console.log(req.body.username);
-	MongoClient.connect(mongoDB, { useNewUrlParser: true }, function(err){
-        if(err) throw err;
-        db.collection('user').findOne({
-            username : req.body.username, password : req.body.password
-        }, function(err, user){
-            if(err) throw err;
-            if(user && user.length !== 0){  
-                return res.status(200).json({
-                    status: 'success',
-                    user: user.username,
-                    photo: user.photo,
-                    token: jwt.sign({
-						data: user
-					  }, 'secret', { expiresIn: '2h'})
-                })
-            } else {
-                return res.status(200).json({
-                    status: 'fail',
-                    message: `L'un des champs est erroné :)`
-                })
-            }
-             
-        })
-    });
 });
 
 if (!process.env.PORT) {

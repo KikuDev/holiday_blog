@@ -1,0 +1,5 @@
+<div class="members" [class.full]="showMember">
+   <div class="member" *ngFor="let availableMember of availableMembers">
+      <img [src]="availableMember.photo" alt="{{availableMember.name}}">
+   </div>
+</div>

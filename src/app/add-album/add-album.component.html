@@ -1,21 +1,6 @@
 <div class="add" (click)="manageFocus($event)">
 
   <app-step1 [personsFocused]="personsFocused" [cityFocused]="cityFocused"></app-step1>
-
-
-
-    <!--
-    <div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" [ngClass]="{ 'is-drop-over': dragOver }">
-        <h1>Drag &amp; Drop</h1>
-    </div>
-      
-      <label class="upload-button">
-        <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
-        or choose file(s)
-      </label>
-      
-      <button type="button" class="start-upload-btn" (click)="startUpload()">
-        Start Upload
-      </button>
-    -->
+  <app-step2 hidden></app-step2>
+  
 </div>

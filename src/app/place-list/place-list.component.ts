@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../album.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
   selector: 'app-place-list',

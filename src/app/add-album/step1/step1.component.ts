@@ -26,5 +26,4 @@ export class Step1Component implements OnInit {
   nextStep() {
     this.step++;
   }
-
 }

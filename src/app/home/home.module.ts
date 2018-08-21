@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { NgxUploaderModule } from 'ngx-uploader';
+import { FileSelectDirective } from 'ng2-file-upload';
 
 import { HomeComponent } from './home.component';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -16,7 +16,8 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '../../../node_modules/@angular/material/core';
 import { Step1Component } from '../add-album/step1/step1.component';
-
+import { MembersComponent } from '../add-album/step1/members/members.component';
+import { Step2Component } from '../add-album/step2/step2.component';
 
 const HomeRoutes: Routes = [
   { 
@@ -40,7 +41,6 @@ const HomeRoutes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(HomeRoutes),
-    NgxUploaderModule,
     FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
@@ -60,7 +60,10 @@ const HomeRoutes: Routes = [
     PlaceListComponent,
     PlaceItemComponent,
     AddAlbumComponent,
-    Step1Component
+    Step1Component,
+    MembersComponent,
+    FileSelectDirective,
+    Step2Component
   ],
   providers: [NeedAuthGuard,
     {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}

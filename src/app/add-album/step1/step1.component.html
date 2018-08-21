@@ -6,6 +6,8 @@
       <label for="persons" [class.focus]="personsFocused || persons.length > 0">Entrez le(s) prénom(s)</label>
       <input type="text" class="form-control" id="persons" placeholder="" [(ngModel)]="persons">
     </div>
+
+    <app-members [member]="persons"></app-members>
   </div>
 
   <div class="info">
