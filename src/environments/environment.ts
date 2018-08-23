@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  cloud_name: 'gregDev',
+  upload_preset: 'e3z0ydym',
+  backURL: 'http://localhost:8081'
 };
 
 /*

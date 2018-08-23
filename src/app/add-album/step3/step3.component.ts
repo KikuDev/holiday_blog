@@ -5,23 +5,27 @@ import { Cloudinary } from '@cloudinary/angular-5.x';
 import { HttpClient } from '../../../../node_modules/@angular/common/http';
 
 @Component({
-  selector: 'app-step2',
-  templateUrl: './step2.component.html',
-  styleUrls: ['./step2.component.scss']
+  selector: 'app-step3',
+  templateUrl: './step3.component.html',
+  styleUrls: ['./step3.component.scss']
 })
-export class Step2Component implements OnInit {
+export class Step3Component implements OnInit {
+  @Input() nameFocused: boolean = false;
   @Input() step: number = 1;
-  @Output() step2validate: EventEmitter<object> = new EventEmitter();
+  @Output() step3validate: EventEmitter<object> = new EventEmitter();
 
   constructor(private sanitizer: DomSanitizer, private cloudinary: Cloudinary,
     private zone: NgZone,
     private http: HttpClient) {}
 
   public uploader: FileUploader;
-  public filePreviewPath: SafeUrl;
-  couvURL: string;
+  albumName: string = '';
   couvUploaded: boolean = false;
   nextStepReady: boolean = false;
+  UploadInProgress: boolean = false;
+  progressNumber: number;
+  imgList: SafeUrl[] =[];
+  photoListUrls: string[] = [];
 
   ngOnInit() {
     const uploaderOptions: FileUploaderOptions = {
@@ -44,16 +48,29 @@ export class Step2Component implements OnInit {
 
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = false;
-      this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file._file)));
+      let filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(file._file)));
+      this.imgList.push(filePreviewPath);
     };
     
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       let res = JSON.parse(response);
+      console.log(res);
+      this.photoListUrls.push(res.secure_url);
+      console.log(this.photoListUrls);
+     };
 
-      this.couvURL = res.secure_url;
+     this.uploader.onProgressAll = (progress: any) => {
+        this.UploadInProgress = true;
+       this.progressNumber = progress;
+       console.log(progress);
+     }
+
+     this.uploader.onCompleteAll = () => {
+      this.UploadInProgress = false;
       this.couvUploaded = true;
       this.nextStepReady = true;
-     };
+       console.log("FINISHED");
+     }
 
      this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       // Add Cloudinary's unsigned upload preset to the upload form
@@ -65,7 +82,7 @@ export class Step2Component implements OnInit {
       // Note that by default, when uploading via the API, folders are not automatically created in your Media Library.
       // In order to automatically create the folders based on the API requests,
       // please go to your account upload settings and set the 'Auto-create folders' option to enabled.
-      form.append('folder', 'couv');
+      form.append('folder', `album-${localStorage.getItem('USER')}-${this.albumName}`);
       // Add file to upload
       form.append('file', fileItem);
 
@@ -78,9 +95,10 @@ export class Step2Component implements OnInit {
   }
 
   nextStep() {
-    this.step2validate.emit({
-      step: 2,
-      couvURL: this.couvURL
+    this.step3validate.emit({
+      step: 3,
+      albumName: this.albumName,
+      photoListURL: this.photoListUrls
     });
   }
 

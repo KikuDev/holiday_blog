@@ -9,6 +9,7 @@ h1 {
     margin-bottom: 20px;
     position: relative;
     label {
+        color: #0000008a;
         left: 5px;
         position: absolute;
         top: 0;
@@ -43,20 +44,23 @@ p {
 
 .step-1 {
 	box-shadow: 0px 0px 10px -2px #000;
-	height: 600px;
 	overflow: hidden;
 	padding: 20px;
-	transition: 800ms ease-in-out;
+    transition: 800ms ease-in-out;
+    z-index: 1;
 	&.validated {
-		animation: 500ms stepValidated 900ms forwards ease-out;
-		height: 37px;
+		animation: 300ms stepValidated forwards ease-out;
 	}
 }
 
 @keyframes stepValidated {
-	100% {
-		transform: translate(-60%, -446%);
-	}
+	95% {
+		transform: translateX(-200%);
+    }
+    100% {
+		transform: translateX(-200%);
+        display:none;
+    }
 }
 
 button {
@@ -83,4 +87,9 @@ button {
     &:focus {
         outline: none;
     }
+}
+
+.err {
+    color: red;
+    text-align: center;
 }

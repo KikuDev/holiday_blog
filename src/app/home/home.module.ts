@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import cloudinaryConfiguration from './config';
 
 import { HomeComponent } from './home.component';
 import { NavbarComponent } from '../navbar/navbar.component';
@@ -18,6 +21,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '../../../node_modules/@ang
 import { Step1Component } from '../add-album/step1/step1.component';
 import { MembersComponent } from '../add-album/step1/members/members.component';
 import { Step2Component } from '../add-album/step2/step2.component';
+import { PhotoAlbumService } from './photo-album.service';
+import { Step3Component } from '../add-album/step3/step3.component';
 
 const HomeRoutes: Routes = [
   { 
@@ -46,7 +51,8 @@ const HomeRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     BrowserAnimationsModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    CloudinaryModule.forRoot(Cloudinary, cloudinaryConfiguration)
   ],
   exports: [
     BrowserAnimationsModule,
@@ -63,10 +69,13 @@ const HomeRoutes: Routes = [
     Step1Component,
     MembersComponent,
     FileSelectDirective,
-    Step2Component
+    Step2Component,
+    Step3Component
   ],
-  providers: [NeedAuthGuard,
-    {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'}
+  providers: [
+    NeedAuthGuard,
+    {provide: MAT_DATE_LOCALE, useValue: MAT_DATE_LOCALE},
+    PhotoAlbumService
   ]
 })
 export class HomeModule { }

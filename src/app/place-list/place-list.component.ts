@@ -12,7 +12,10 @@ export class PlaceListComponent implements OnInit {
   constructor(private api: AlbumService) { }
 
   ngOnInit() {
-   this.api.getAlbums().subscribe(data => this.places = data);
+   this.api.getAlbums().subscribe(data =>{
+    this.places = data;
+    console.log(data);
+   });
   }
 
 }

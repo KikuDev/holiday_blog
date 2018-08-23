@@ -1,0 +1,48 @@
+<div class="step-3" [class.validated]="step === 4">
+
+  <div *ngIf="UploadInProgress" class="loading">
+    <div class="percents" [ngStyle]="{'width.px': progressNumber * 15, 'height.px': progressNumber * 15}">
+        {{ progressNumber }}%
+    </div>
+  </div>
+
+    <h1>Troisième Étape</h1>
+
+    <div class="info">
+      <h2>Nom de l'album</h2>
+      <div class="form-group">
+        <label for="albumName" [class.focus]="nameFocused || albumName.length > 0">Entrez le nom*</label>
+        <input required type="text" class="form-control" id="albumName" placeholder="" [(ngModel)]="albumName">
+      </div>
+    </div>
+  
+    <div class="info">
+      <h2>Les Photos</h2>
+      <div class="upload-btn-wrapper">
+        <button class="btn" [class.ready]="uploader.getNotUploadedItems().length || couvUploaded">Choisir les photos</button>
+        <input type="file" name="photo" ng2FileSelect [uploader]="uploader" multiple/>
+      </div>
+  
+      <div *ngIf="imgList.length > 0" class="preview-wrapper">
+        <span *ngFor="let img of imgList; let i=index">
+            <img *ngIf="i < 16" [src]="img" alt="preview {{i}}">
+        </span>
+        <div *ngIf="imgList.length > 16" class="isMore">
+            + {{imgList.length - 16}} photos
+        </div>
+      </div>
+  
+      <div class="file-ready" *ngIf="uploader.getNotUploadedItems().length">Photos prêtes</div>
+      <div class="file-not-ready" *ngIf="!uploader.getNotUploadedItems().length && !nextStepReady">Aucune photo selectionnée</div>
+      <div class="file-ready" *ngIf="nextStepReady">Photos envoyées !</div>
+  
+      <button *ngIf="!nextStepReady" type="button" class="btn btn-success btn-s" 
+          (click)="uploader.uploadAll()" 
+          [disabled]="!uploader.getNotUploadedItems().length" >
+              Envoyer
+      </button>
+    </div>
+  
+    <button *ngIf="couvUploaded" class="next" (click)="nextStep()">Créer l'album</button>
+  
+  </div>

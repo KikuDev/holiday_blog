@@ -10,12 +10,51 @@ h2 {
     text-align: center;
 }
 
+.loading {
+	position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	z-index: 1;
+	.percents {
+		width: 50px;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: #f00;
+		border-radius: 5px;
+		color: #fff;
+		box-shadow: 0px 0px 10px -2px black;
+		overflow: hidden;
+		font-size: 3rem;
+		transition: 100ms;
+	}
+}
+
 .form-group {
-    margin-bottom: 20px;
-    position: relative;
+	position: relative;
+    margin: 30px auto;
+    width: 50%;
+    label {
+        color: #0000008a;
+        left: 5px;
+        position: absolute;
+        top: 0;
+        transition: 250ms;
+        &.focus {
+            font-size: 12px;
+            top: -14px;
+        }
+    }
     input {
         background-color: #0000;
         border: none;
+        border-radius: 0;
         box-shadow: none;
         padding: 5px;
         position: relative;
@@ -28,12 +67,12 @@ h2 {
     }
 }
 
-.step-2 {
+.step-3 {
 	box-shadow: 0px 0px 10px -2px #000;
 	overflow: hidden;
 	padding: 20px;
     transition: 800ms ease-in-out;
-    width: 350px;
+    width: 700px;
 }
 
 button {
@@ -60,6 +99,13 @@ button {
     &:focus {
         outline: none;
     }
+}
+
+.isMore {
+    margin-bottom: 7px;
+    display: inline-block;
+    padding: 7px;
+    box-shadow: 0px 0px 9px -2px black;
 }
 
 .upload-btn-wrapper {
@@ -100,9 +146,12 @@ button {
 }
 
 .preview-wrapper {
-    width: 350px;
+	text-align: center;
+    width: 700px;
     img {
-        width: 100%;
+		width: 10%;
+		margin: 5px;
+		box-shadow: 0px 0px 6px -2px black;
     }
 }
   

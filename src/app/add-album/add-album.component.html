@@ -1,6 +1,7 @@
 <div class="add" (click)="manageFocus($event)">
 
-  <app-step1 [personsFocused]="personsFocused" [cityFocused]="cityFocused"></app-step1>
-  <app-step2 hidden></app-step2>
+  <app-step1 *ngIf="addStep === 1" [personsFocused]="personsFocused" [cityFocused]="cityFocused" [step]="addStep" (step1validate)="valStep($event)"></app-step1>
+  <app-step2 *ngIf="addStep === 2" [step]="addStep" (step2validate)="valStep($event)"></app-step2>
+  <app-step3 *ngIf="addStep === 3" [nameFocused]="nameFocused" [step]="addStep" (step3validate)="valStep($event)"></app-step3>
   
 </div>

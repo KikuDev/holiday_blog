@@ -3,8 +3,8 @@
   <div class="info">
     <h2>Qui ?</h2>
     <div class="form-group">
-      <label for="persons" [class.focus]="personsFocused || persons.length > 0">Entrez le(s) prénom(s)</label>
-      <input type="text" class="form-control" id="persons" placeholder="" [(ngModel)]="persons">
+      <label for="persons" [class.focus]="personsFocused || persons.length > 0">Entrez le(s) prénom(s)*</label>
+      <input required type="text" class="form-control" id="persons" placeholder="" [(ngModel)]="persons">
     </div>
 
     <app-members [member]="persons"></app-members>
@@ -13,21 +13,21 @@
   <div class="info">
     <h2>Où ?</h2>
     <div class="form-group">
-      <label for="city" [class.focus]="cityFocused || city.length > 0">Entrez le lieu</label>
-      <input type="text" class="form-control" id="city" placeholder="" [(ngModel)]="city">
+      <label for="city" [class.focus]="cityFocused || city.length > 0">Entrez le lieu*</label>
+      <input required type="text" class="form-control" id="city" placeholder="" [(ngModel)]="city">
     </div>
   </div>
 
   <div class="info">
     <h2>Quand ?</h2>
     <mat-form-field>
-        <input matInput [matDatepicker]="startDate" placeholder="Date de départ">
+        <input required matInput [matDatepicker]="startDate" placeholder="Date de départ" [(ngModel)]="fromDate">
         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
         <mat-datepicker touchUi #startDate></mat-datepicker>
       </mat-form-field>
   
       <mat-form-field>
-        <input matInput [matDatepicker]="endDate" placeholder="Date de retour">
+        <input matInput [matDatepicker]="endDate" placeholder="Date de retour" [(ngModel)]="toDate">
         <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
         <mat-datepicker touchUi #endDate></mat-datepicker>
       </mat-form-field>
@@ -35,5 +35,6 @@
 
   <button class="next" (click)="nextStep()">Suivant</button>
   
+  <p *ngIf="error" class="err">Veuillez remplir les champs obligatoires</p>
 
 </div>
